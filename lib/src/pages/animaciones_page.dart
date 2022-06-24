@@ -30,6 +30,7 @@ class _RectanguloAnimagoState extends State<RectanguloAnimago>
   late Animation<double> rotacion;
   late Animation<double> opacidad;
   late Animation<double> moverDerecha;
+  late Animation<double> agrandar;
 
   @override
   void initState() {
@@ -50,7 +51,14 @@ class _RectanguloAnimagoState extends State<RectanguloAnimago>
           0.25,
           curve: Curves.easeOut,
         )));
+
     moverDerecha = Tween(begin: 0.1, end: 200.0).animate(controller);
+
+    agrandar = Tween(begin: 0.0, end: 2.0 * Math.pi).animate(CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeOut,
+    ));
+    agrandar = Tween(begin: 0.1, end: 2.0).animate(controller);
 
     controller.addListener(() {
       if (controller.status == AnimationStatus.completed) {
@@ -80,7 +88,10 @@ class _RectanguloAnimagoState extends State<RectanguloAnimago>
                 angle: rotacion.value,
                 child: Opacity(
                   opacity: opacidad.value,
-                  child: childRectangulo,
+                  child: Transform.scale(
+                    scale: agrandar.value,
+                    child: childRectangulo,
+                  ),
                 )),
           );
         });
