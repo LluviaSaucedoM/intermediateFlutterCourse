@@ -37,9 +37,18 @@ class _RectanguloAnimagoState extends State<RectanguloAnimago>
       duration: const Duration(milliseconds: 4000),
     );
 
-    rotacion = Tween(begin: 0.0, end: 2.0 * Math.pi)
-        .animate(CurvedAnimation(parent: controller, curve: Curves.easeOut));
-    opacidad = Tween(begin: 0.1, end: 1.0).animate(controller);
+    rotacion = Tween(begin: 0.0, end: 2.0 * Math.pi).animate(CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeOut,
+    ));
+
+    opacidad = Tween(begin: 0.1, end: 1.0).animate(CurvedAnimation(
+        parent: controller,
+        curve: const Interval(
+          0.0,
+          0.25,
+          curve: Curves.easeOut,
+        )));
 
     controller.addListener(() {
       if (controller.status == AnimationStatus.completed) {
