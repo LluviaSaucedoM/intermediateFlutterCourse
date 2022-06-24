@@ -29,6 +29,7 @@ class _RectanguloAnimagoState extends State<RectanguloAnimago>
   late AnimationController controller;
   late Animation<double> rotacion;
   late Animation<double> opacidad;
+  late Animation<double> moverDerecha;
 
   @override
   void initState() {
@@ -49,6 +50,7 @@ class _RectanguloAnimagoState extends State<RectanguloAnimago>
           0.25,
           curve: Curves.easeOut,
         )));
+    moverDerecha = Tween(begin: 0.1, end: 200.0).animate(controller);
 
     controller.addListener(() {
       if (controller.status == AnimationStatus.completed) {
@@ -72,12 +74,15 @@ class _RectanguloAnimagoState extends State<RectanguloAnimago>
         animation: controller,
         child: const _Rectangulo(),
         builder: (BuildContext context, childRectangulo) {
-          return Transform.rotate(
-              angle: rotacion.value,
-              child: Opacity(
-                opacity: opacidad.value,
-                child: childRectangulo,
-              ));
+          return Transform.translate(
+            offset: Offset(moverDerecha.value, 0),
+            child: Transform.rotate(
+                angle: rotacion.value,
+                child: Opacity(
+                  opacity: opacidad.value,
+                  child: childRectangulo,
+                )),
+          );
         });
   }
 }
