@@ -61,10 +61,14 @@ class _RectanguloAnimagoState extends State<RectanguloAnimago>
     controller.forward();
     return AnimatedBuilder(
         animation: controller,
-        // child:  _Rectangulo(),
-        builder: (BuildContext context, child) {
+        child: const _Rectangulo(),
+        builder: (BuildContext context, childRectangulo) {
           return Transform.rotate(
-              angle: rotacion.value, child: const _Rectangulo());
+              angle: rotacion.value,
+              child: Opacity(
+                opacity: opacidad.value,
+                child: childRectangulo,
+              ));
         });
   }
 }
