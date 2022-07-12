@@ -3,10 +3,20 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class RadialProgress extends StatefulWidget {
+  const RadialProgress({
+    required this.porcentaje,
+    this.colorPrimario = Colors.blue,
+    this.colorSecundario = Colors.grey,
+    this.grosorPrimario = 10,
+    this.grosorSecundario = 4,
+    Key? key,
+  }) : super(key: key);
   // ignore: prefer_typing_uninitialized_variables
   final porcentaje;
-  // ignore: use_key_in_widget_constructors
-  const RadialProgress({this.porcentaje});
+  final Color colorPrimario;
+  final Color colorSecundario;
+  final double grosorPrimario;
+  final double grosorSecundario;
 
   @override
   _RadialProgressState createState() => _RadialProgressState();
@@ -15,14 +25,14 @@ class RadialProgress extends StatefulWidget {
 class _RadialProgressState extends State<RadialProgress>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
-  late num procentajeAnterior;
+  late double porcentajeAnterior;
 
   @override
   void initState() {
-    procentajeAnterior = widget.porcentaje;
-
+    porcentajeAnterior = widget.porcentaje;
     controller = AnimationController(
-        vsync: this, duration: const Duration(microseconds: 200));
+        vsync: this, duration: const Duration(milliseconds: 200));
+
     super.initState();
   }
 
@@ -35,50 +45,74 @@ class _RadialProgressState extends State<RadialProgress>
   @override
   Widget build(BuildContext context) {
     controller.forward(from: 0.0);
-    return Container(
-      padding: const EdgeInsets.all(10),
-      width: double.infinity,
-      height: double.infinity,
-      child: CustomPaint(
-        painter: _MiRadialProgres(widget.porcentaje),
-      ),
+
+    final diferenciaAnimar = widget.porcentaje - porcentajeAnterior;
+    porcentajeAnterior = widget.porcentaje;
+
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (BuildContext context, child) {
+        return Container(
+          padding: const EdgeInsets.all(10),
+          width: double.infinity,
+          height: double.infinity,
+          child: CustomPaint(
+            painter: _MiRadialProgress(
+                (widget.porcentaje - diferenciaAnimar) +
+                    (diferenciaAnimar * controller.value),
+                widget.colorPrimario,
+                widget.colorSecundario,
+                widget.grosorPrimario,
+                widget.grosorSecundario),
+          ),
+        );
+      },
     );
   }
 }
 
-class _MiRadialProgres extends CustomPainter {
-  num porcentaje;
-  _MiRadialProgres(this.porcentaje);
+class _MiRadialProgress extends CustomPainter {
+  // ignore: prefer_typing_uninitialized_variables
+  final porcentaje;
+  final Color colorPrimario;
+  final Color colorSecundario;
+  final double grosorPrimario;
+  final double grosorSecundario;
+
+  _MiRadialProgress(this.porcentaje, this.colorPrimario, this.colorSecundario,
+      this.grosorPrimario, this.grosorSecundario);
 
   @override
   void paint(Canvas canvas, Size size) {
-    //Circulo
+    final Rect rect = Rect.fromCircle(center: const Offset(0, 0), radius: 180);
+    const Gradient gradient = LinearGradient(
+        colors: <Color>[Color(0xffC012FF), Color(0xffC012FF), Colors.red]);
+
+    // Circulo completado
     final paint = Paint()
-      ..strokeWidth = 5
-      ..color = Colors.blueAccent
+      ..strokeWidth = grosorSecundario
+      ..color = colorSecundario
       ..style = PaintingStyle.stroke;
 
-    final Offset center = Offset(size.width * 0.5, size.height / 2);
-    final double radius = min(size.width * 0.5, size.height * 0.5);
-    canvas.drawCircle(center, radius, paint);
+    final center = Offset(size.width * 0.5, size.height / 2);
+    final radio = min(size.width * 0.5, size.height * 0.5);
 
-    //Arco
+    canvas.drawCircle(center, radio, paint);
+
+    // Arco
     final paintArco = Paint()
-      ..strokeWidth = 8
-      ..color = Colors.pinkAccent
+      ..strokeWidth = grosorPrimario
+      // ..color = colorPrimario
+      ..shader = gradient.createShader(rect)
+      ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
-    // Parte que se va llenado
 
+    // Parte que se deberá ir llenando
     double arcAngle = 2 * pi * (porcentaje / 100);
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      -pi / 2,
-      arcAngle,
-      true,
-      paintArco,
-    );
+    canvas.drawArc(Rect.fromCircle(center: center, radius: radio), -pi / 2,
+        arcAngle, false, paintArco);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:math';
 import 'dart:ui';
 
@@ -12,23 +14,19 @@ class CircularProgressPage extends StatefulWidget {
 
 class _CircularProgressPageState extends State<CircularProgressPage>
     with SingleTickerProviderStateMixin {
-  num porcentaje = 0.0;
-  num newPorcentaje = 0.0;
-
   late AnimationController controller;
+
+  double porcentaje = 0.0;
+  double nuevoPorcentaje = 0.0;
+
   @override
   void initState() {
     controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 8000),
-    );
-
+        vsync: this, duration: const Duration(milliseconds: 800));
     controller.addListener(() {
-      // ignore: avoid_print
-      print('valor controller: ${controller.value}');
+      // print('valor controller: ${ controller.value }');
       setState(() {
-        porcentaje =
-            lerpDouble(porcentaje, newPorcentaje, controller.value) as num;
+        porcentaje = lerpDouble(porcentaje, nuevoPorcentaje, controller.value)!;
       });
     });
 
@@ -45,67 +43,63 @@ class _CircularProgressPageState extends State<CircularProgressPage>
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.refresh),
-        backgroundColor: Colors.pink,
-        onPressed: () {
-          porcentaje = newPorcentaje;
-          newPorcentaje += 10;
-          if (newPorcentaje > 100) {
-            newPorcentaje = 0;
-            porcentaje = 0;
-          }
-
-          controller.forward(from: 0.0);
-
-          setState(() {});
-        },
-      ),
+          child: const Icon(Icons.refresh),
+          backgroundColor: Colors.pink,
+          onPressed: () {
+            porcentaje = nuevoPorcentaje;
+            nuevoPorcentaje += 10;
+            if (nuevoPorcentaje > 100) {
+              nuevoPorcentaje = 0;
+              porcentaje = 0;
+            }
+            controller.forward(from: 0.0);
+            setState(() {});
+          }),
       body: Center(
         child: Container(
-            padding: const EdgeInsets.all(10),
-            width: 300,
-            height: 300,
-            child: CustomPaint(
-              painter: _MiRadialProgres(porcentaje),
-            )),
+          padding: const EdgeInsets.all(5),
+          width: 300,
+          height: 300,
+          // color: Colors.red,
+          child: CustomPaint(
+            painter: _MiRadialProgress(porcentaje),
+          ),
+        ),
       ),
     );
   }
 }
 
-class _MiRadialProgres extends CustomPainter {
-  num porcentaje;
-  _MiRadialProgres(this.porcentaje);
+class _MiRadialProgress extends CustomPainter {
+  final porcentaje;
+
+  _MiRadialProgress(this.porcentaje);
 
   @override
   void paint(Canvas canvas, Size size) {
-    //Circulo
+    // Circulo completado
     final paint = Paint()
-      ..strokeWidth = 5
-      ..color = Colors.blue
+      ..strokeWidth = 4
+      ..color = Colors.grey
       ..style = PaintingStyle.stroke;
 
-    final Offset center = Offset(size.width * 0.5, size.height / 2);
-    final double radius = min(size.width * 0.5, size.height * 0.5);
-    canvas.drawCircle(center, radius, paint);
+    final center = Offset(size.width * 0.5, size.height / 2);
+    final radio = min(size.width * 0.5, size.height * 0.5);
 
-    //Arco
+    canvas.drawCircle(center, radio, paint);
+
+    // Arco
     final paintArco = Paint()
       ..strokeWidth = 10
       ..color = Colors.pink
       ..style = PaintingStyle.stroke;
-    // Parte que se va llenado
 
+    // Parte que se deberá ir llenando
     double arcAngle = 2 * pi * (porcentaje / 100);
-    canvas.drawArc(
-      Rect.fromCircle(center: center, radius: radius),
-      -pi / 2,
-      arcAngle,
-      true,
-      paintArco,
-    );
+    canvas.drawArc(Rect.fromCircle(center: center, radius: radio), -pi / 2,
+        arcAngle, false, paintArco);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
