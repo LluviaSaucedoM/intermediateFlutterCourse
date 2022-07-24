@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:designs/src/models/slider_model.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:flutter_svg/svg.dart' show SvgPicture;
 
@@ -7,13 +10,16 @@ class SlideShowPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            Expanded(child: _Slides()),
-            _Dots(),
-          ],
+    return ChangeNotifierProvider(
+      create: (_) => SliderModel(),
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            children: <Widget>[
+              Expanded(child: _Slides()),
+              _Dots(),
+            ],
+          ),
         ),
       ),
     );
@@ -23,10 +29,9 @@ class SlideShowPage extends StatelessWidget {
 class _Dots extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 70,
-      color: Colors.blue[200],
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: const <Widget>[
@@ -48,12 +53,18 @@ class _Dot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 15,
-      height: 15,
+    final pageViewIndex = Provider.of<SliderModel>(context).currentPage;
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      width: 17,
+      height: 17,
       margin: const EdgeInsets.symmetric(horizontal: 7),
-      decoration:
-          BoxDecoration(color: Colors.grey[300], shape: BoxShape.circle),
+      decoration: BoxDecoration(
+        color: (pageViewIndex >= index - 0.5 && pageViewIndex < index + 0.5)
+            ? const Color.fromARGB(255, 69, 66, 202)
+            : Colors.grey,
+        shape: BoxShape.circle,
+      ),
     );
   }
 }
@@ -64,12 +75,13 @@ class _Slides extends StatefulWidget {
 }
 
 class _SlidesState extends State<_Slides> {
-  final pageViewController = PageController();
+  final PageController pageViewController = PageController();
 
   @override
   void initState() {
     pageViewController.addListener(() {
-      print('pagina numero:${pageViewController.page}');
+      Provider.of<SliderModel>(context, listen: false).currentPage =
+          pageViewController.page!;
     });
     super.initState();
   }

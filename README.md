@@ -15,15 +15,33 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-**Screen viewsa**
-![](assets/glance/pantalla.1.png)
-![](assets/glance/pantalla.2.png)
-![](assets/glance/pantalla.3.png)
-![](assets/glance/pantalla.4.png)
-![](assets/glance/pantalla.5.png)
-![](assets/glance/pantalla.6.png)
-![](assets/glance/pantalla.7.png)
-![](assets/glance/pantalla.8.png)
-![](assets/glance/pantalla.9.png)
-![](assets/glance/pantalla.10.png)
-![](assets/glance/pantalla.11.png)
+## Screen view
+- Animation
+<p align="center">
+  <img src="assets/glance/pantalla.1.png" width="350" hight="400">
+  <img src="assets/glance/pantalla.2.png" width="350" hight="400">
+ </p> 
+ 
+- Headers
+<p align="center">
+  <img src="assets/glance/pantalla.3.png" width="350" hight="400">
+  <img src="assets/glance/pantalla.4.png" width="350" hight="400">
+  <img src="assets/glance/pantalla.5.png" width="350" hight="400">
+  <img src="assets/glance/pantalla.6.png" width="350" hight="400">
+  <img src="assets/glance/pantalla.7.png" width="350" hight="400">
+  <img src="assets/glance/pantalla.8.png" width="350" hight="400">
+  <img src="assets/glance/pantalla.9.png" width="350" hight="400">
+  <img src="assets/glance/pantalla.10.png" width="350" hight="400">
+</p>
+
+- Charts
+<p align="center">
+ <img src="assets/glance/pantalla.11.png" width="350" hight="400">  
+</p>
+
+- Slide Show Page
+<p align="center">
+ <img src="assets/glance/pantalla.12.png" width="350" hight="400">
+ <img src="assets/glance/pantalla.13.png" width="350" hight="400">
+ <img src="assets/glance/pantalla.14.png" width="350" hight="400">
+</p>
