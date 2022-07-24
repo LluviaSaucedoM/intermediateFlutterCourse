@@ -9,22 +9,22 @@ class AnimacionesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: RectanguloAnimago(),
+        child: RectanguloAnimado(),
       ),
     );
   }
 }
 
-class RectanguloAnimago extends StatefulWidget {
-  const RectanguloAnimago({
+class RectanguloAnimado extends StatefulWidget {
+  const RectanguloAnimado({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<RectanguloAnimago> createState() => _RectanguloAnimagoState();
+  State<RectanguloAnimado> createState() => _RectanguloAnimadoState();
 }
 
-class _RectanguloAnimagoState extends State<RectanguloAnimago>
+class _RectanguloAnimadoState extends State<RectanguloAnimado>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> rotacion;

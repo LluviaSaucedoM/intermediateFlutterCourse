@@ -58,12 +58,13 @@ class _RadialProgressState extends State<RadialProgress>
           height: double.infinity,
           child: CustomPaint(
             painter: _MiRadialProgress(
-                (widget.porcentaje - diferenciaAnimar) +
-                    (diferenciaAnimar * controller.value),
-                widget.colorPrimario,
-                widget.colorSecundario,
-                widget.grosorPrimario,
-                widget.grosorSecundario),
+              (widget.porcentaje - diferenciaAnimar) +
+                  (diferenciaAnimar * controller.value),
+              widget.colorPrimario,
+              widget.colorSecundario,
+              widget.grosorPrimario,
+              widget.grosorSecundario,
+            ),
           ),
         );
       },
@@ -102,7 +103,6 @@ class _MiRadialProgress extends CustomPainter {
     // Arco
     final paintArco = Paint()
       ..strokeWidth = grosorPrimario
-      // ..color = colorPrimario
       ..shader = gradient.createShader(rect)
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;

@@ -6,7 +6,7 @@ class HeaderCuadrado extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      color: const Color(0xff9DB34F),
+      color: const Color.fromARGB(255, 93, 207, 135),
     );
   }
 }
@@ -18,7 +18,7 @@ class HeaderBordesRedondeados extends StatelessWidget {
     return Container(
       height: 300,
       decoration: const BoxDecoration(
-        color: Color(0xff9DB34F),
+        color: Color.fromARGB(255, 225, 75, 193),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(60),
           bottomRight: Radius.circular(60),
@@ -88,7 +88,7 @@ class _HeaderVerticalPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
-    paint.color = const Color(0xff9DB34F);
+    paint.color = const Color.fromARGB(255, 239, 146, 177);
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 5;
 
@@ -136,7 +136,7 @@ class _HeaderPicoPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
-    paint.color = const Color(0xff9DB34F);
+    paint.color = const Color.fromARGB(255, 244, 214, 125);
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 20;
 
@@ -174,7 +174,7 @@ class _HeaderCirularPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
-    paint.color = const Color(0xff9DB34F);
+    paint.color = const Color.fromARGB(115, 98, 232, 201);
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 20;
 
@@ -216,7 +216,7 @@ class _HeaderHondaPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint();
-    paint.color = const Color(0xff9DB34F);
+    paint.color = const Color.fromARGB(255, 165, 129, 227);
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 20;
 
