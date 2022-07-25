@@ -20,6 +20,7 @@ samples, guidance on mobile development, and a full API reference.
 <p align="center">
   <img src="assets/glance/pantalla.1.png" width="350" hight="400">
   <img src="assets/glance/pantalla.2.png" width="350" hight="400">
+  <img src="assets/glance/pantalla.19.gif" width="350" hight="400">
  </p> 
  
 - Headers
@@ -46,6 +47,7 @@ samples, guidance on mobile development, and a full API reference.
  <img src="assets/glance/pantalla.14.png" width="350" hight="400">
  <img src="assets/glance/pantalla.15.png" width="350" hight="400">
  <img src="assets/glance/pantalla.16.png" width="350" hight="400">
+ <img src="assets/glance/pantalla.18.png" width="350" hight="400">
 </p>
 
 - PinterestPage
