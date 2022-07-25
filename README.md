@@ -47,3 +47,9 @@ samples, guidance on mobile development, and a full API reference.
  <img src="assets/glance/pantalla.15.png" width="350" hight="400">
  <img src="assets/glance/pantalla.16.png" width="350" hight="400">
 </p>
+
+- PinterestPage
+<p align="center">
+ <img src="assets/glance/pantalla.17.png" width="350" hight="400">  
+</p>
+
