@@ -87,6 +87,8 @@ class _PinterestMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final itemSeleccionado = Provider.of<_MenuModel>(context).itemSeleccionado;
     final menuModel = Provider.of<_MenuModel>(context);
+    debugPrint('menuModel: $menuModel');
+    debugPrint('PinterestButton Item: $item');
     return GestureDetector(
       onTap: () {
         Provider.of<_MenuModel>(context, listen: false).itemSeleccionado =
