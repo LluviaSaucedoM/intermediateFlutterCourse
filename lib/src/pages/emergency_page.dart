@@ -88,7 +88,7 @@ class _Encabezado extends StatelessWidget {
         const IconHeder(
           icon: FontAwesomeIcons.plus,
           titulo: 'Asistencia Medica',
-          subtitulo: 'Has solicitado',
+          subtitulo: 'has solicitado',
           color1: Color(0xff906EF5),
           color2: Color(0xff6989F5),
         ),
